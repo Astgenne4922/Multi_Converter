@@ -24,6 +24,7 @@ function requestHandler(req, res){
         case '.jpeg' :
         case '.jfif':
         case '.png':
+        case '.jpg':
             contentType = `image/${extnameNoPoint}`
             break;
 //#endregion
