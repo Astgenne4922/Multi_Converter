@@ -1,11 +1,10 @@
 let options = [ "Values", "Data"  , "Lenght", "Temperature", 
                 "Weight", "Volume", "Area"  , "Time"];
-let createDiv = () => {
-    options.forEach(element => {
-        document.body.innerHTML(
-            `<div id="${element}">
-            <h2>${element}</h2>
-            </div>`
-        )
-    });
-}
+
+let innHtml = `<h1>Coverter of Candido and Fornari</h1>\n`;
+options.forEach(element => {
+        innHtml += `<div id="${element}">\n
+        <h2>${element}</h2>\n
+        </div>\n`
+});
+document.getElementById("body").innerHTML = innHtml;
