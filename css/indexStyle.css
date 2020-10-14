@@ -1,3 +1,6 @@
-body{
-    background-color: blue;
+div{
+    list-style-type: none;
+}
+#body div{
+    display: flex;
 }
