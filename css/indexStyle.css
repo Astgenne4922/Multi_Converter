@@ -1,6 +1,15 @@
-div{
+ul{
     list-style-type: none;
+    padding-left: 5px;
 }
-#body div{
+
+#body div div{
     display: flex;
+    align-items: flex-end;
+}
+
+img{
+    height: 20px;
+    margin: 2px;
+    margin-bottom: 2%;
 }
