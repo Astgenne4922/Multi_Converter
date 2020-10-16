@@ -1,4 +1,4 @@
-const valutes = {
+const currency = {
     AUD	: "Australian dollar" ,	
     BGN	: "Bulgarian lev" ,
     BRL	: "Brazilian real" ,	
