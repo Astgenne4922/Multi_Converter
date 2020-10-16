@@ -1,16 +1,16 @@
 "use strict";
 
-let options = ["Currency", "Data", "Lenght", "Temperature", 
-				"Weight", "Volume", "Area"  , "Time"];
+let options = ["Currency", "Data", "Lenght", "Temperature",
+	"Weight", "Volume", "Area", "Time"];
 let ops = {
-	Currency         : [Object.values(currency), Object.keys(currency)],
-    Data        	 : [Object.values(data),Object.keys(data)],
-	Lenght      	 : [Object.values(length), Object.keys(length)],
-	Temperature 	 : [Object.values(temperature), Object.keys(temperature)],
-	Weight           : [Object.values(weight), Object.keys(weight)],
-	Volume           : [Object.values(volume), Object.keys(volume)],
-	Area             : [Object.values(area), Object.keys(area)],
-	Time             : [Object.values(time), Object.keys(time)],
+	Currency: [Object.values(currency), Object.keys(currency)],
+	Data: [Object.values(data), Object.keys(data)],
+	Lenght: [Object.values(length), Object.keys(length)],
+	Temperature: [Object.values(temperature), Object.keys(temperature)],
+	Weight: [Object.values(weight), Object.keys(weight)],
+	Volume: [Object.values(volume), Object.keys(volume)],
+	Area: [Object.values(area), Object.keys(area)],
+	Time: [Object.values(time), Object.keys(time)],
 }
 
 // #region select for type of conversion TO HAMBURGER
@@ -23,8 +23,8 @@ document.getElementById("body").innerHTML = innHtml
 // #endregion
 
 //#region create select for type 
-function createSelect(){
-	document.getElementById("ConvertionKeys")?.remove();	
+function createSelect() {
+	document.getElementById("ConvertionKeys")?.remove();
 
 	let innHtml = document.createElement("select");
 	innHtml.id = "ConvertionKeys";
@@ -43,3 +43,18 @@ function createSelect(){
 	document.getElementById("body").appendChild(innHtml);
 }
 //#endregion
+
+//#region Hamburger
+
+function openNav() {
+	document.getElementById("mySidenav").style.width = "250px";
+	document.getElementById("body").style.marginLeft = "250px";
+	document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+function closeNav() {
+	document.getElementById("mySidenav").style.width = "0";
+	document.getElementById("body").style.marginLeft = "0";
+	document.body.style.backgroundColor = "white";
+} 
+
+// #endregion
