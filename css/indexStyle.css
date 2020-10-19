@@ -95,9 +95,10 @@ label[for="ham-menu"] {
 	background-color: var(--home-bg-color);
 	border-radius: 15px;
 	border: 2px solid var(--border-color);
+	cursor: pointer;
 }
 .ham-menu {
-	width: 40vw;
+	width: 35vw;
 	height: 100%;
 	position: fixed;
 	top: 0;

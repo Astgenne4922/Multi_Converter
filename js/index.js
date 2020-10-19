@@ -1,54 +1,54 @@
 "use strict";
 
-let options = ["Currency", "Data", "Lenght", "Temperature", "Weight", "Volume", "Area", "Time"];
-let ops = {
-	Currency: [Object.values(currency), Object.keys(currency)],
-	Data: [Object.values(data), Object.keys(data)],
-	Lenght: [Object.values(length), Object.keys(length)],
-	Temperature: [Object.values(temperature), Object.keys(temperature)],
-	Weight: [Object.values(weight), Object.keys(weight)],
-	Volume: [Object.values(volume), Object.keys(volume)],
-	Area: [Object.values(area), Object.keys(area)],
-	Time: [Object.values(time), Object.keys(time)],
-};
+let ops = [
+	Object.entries(currency),
+	Object.entries(data),
+	Object.entries(length),
+	Object.entries(temperature),
+	Object.entries(mass),
+	Object.entries(volume),
+	Object.entries(area),
+	Object.entries(time),
+];
 
-let select = `<select class="ConvertionKeys">\n</select>\n`
-let textbox = `<input type="text" class="textbox" value="0">`
+let select = "<select class='ConvertionKeys' onchange='selectChange()'>\n</select>\n";
+let textbox = "<input type='text' class='textbox' value='0'>";
 
-let createHtml = `<h2 id="Type">Currencies</h2>\n
+let createHtml = `<h2 id="Type">Currency</h2>\n
 	${select}
 	${textbox}
 	<img src="../img/exchange.png">\n
 	${textbox}
-	${select}`
-document.getElementById("body").innerHTML = createHtml
+	${select}`;
+document.querySelector("#body").innerHTML = createHtml;
 
-let inputs = [...document.getElementsByTagName("input")]
-inputs.forEach(element => {
-	setInputFilter(element, v => /^\d*\.?\d*$/.test(v));
-});
+setInputFilter();
 
-let img = [...document.getElementsByTagName("img")][0]
-img.addEventListener("click", exchange)
+document.querySelector("img").addEventListener("click", exchange);
 
-let setOptions = (event) => {
-	document.getElementById("Type").innerText = event.path[0].innerHTML;
+function setOptions(event) {
+	document.querySelector("#Type").innerText = event.path[0].innerHTML;
+	[...document.querySelectorAll("input[type='text']")].forEach(e => (e.value = "0"));
 
-	let selects = [...document.getElementsByTagName("select")]
+	let selects = [...document.querySelectorAll("select")];
 
-	let sel = parseInt(e.path[0].id);
-	let opsValues = Object.entries(ops)[sel][1][0]; // insieme dei valori in base al tipo di conversione
-	let opsKey = Object.entries(ops)[sel][1][1]; // insieme delle chiavi in base al tipo di conversione
+	let sel = [...event.path[1].children].findIndex(e => e.isSameNode(event.path[0]));
+	let opsValues = ops[sel]; // insieme dei valori in base al tipo di conversione
 	selects.forEach(element => {
-		element.innerHTML = ""
-		opsValues.forEach((el, idx) => {
+		element.innerHTML = "";
+		opsValues.forEach(el => {
 			let inSelect = document.createElement("option");
-			inSelect.setAttribute("value", opsKey[idx]);
-			inSelect.innerText = el;
+			inSelect.setAttribute("value", el[0]);
+			inSelect.innerText = el[1];
 			element.appendChild(inSelect);
 		});
 	});
+
+	selects[1].selectedIndex = 1;
+
+	document.querySelector("#ham-menu").checked = false;
 }
+
 /*
 function createTextbox() {
 	let el = document.createElement("input");
@@ -95,32 +95,29 @@ function createSelect(e) {
 	}
 }*/
 //#endregion
-let liTags = [...document.getElementsByTagName("li")];
-liTags.map(value => value.addEventListener("click", setOptions));
-liTags[liTags.length - 1].removeEventListener("click", setOptions);
-liTags[liTags.length - 2].removeEventListener("click", setOptions);
 
-//#region Hamburger
+let liTags = [];
 
-function openNav() {
-	document.getElementById("mySidenav").style.width = "250px";
-	document.getElementById("body").style.marginLeft = "250px";
-	document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
-function closeNav() {
-	document.getElementById("mySidenav").style.width = "0";
-	document.getElementById("body").style.marginLeft = "0";
-	document.body.style.backgroundColor = "white";
-}
+titles.forEach(e => {
+	let li = document.createElement("li");
+	li.innerText = e;
+	li.addEventListener("click", setOptions);
+	liTags.push(li);
+});
 
-// #endregion
+document.querySelector("ul").prepend(...liTags);
+
 document.querySelector("li").click();
 
-function exchange(e) {
-	let selectsss = [...document.getElementsByTagName("select")]
-	console.log(selectsss)
-	let selectValue = [selectsss[0].selectedIndex, selectsss[1].selectedIndex ]
-	selectsss[0].selectedIndex = selectValue[1]
-	selectsss[1].selectedIndex = selectValue[0]
+function exchange() {
+	let selectsss = [...document.querySelectorAll("select")];
+	console.log(selectsss);
+	let selectValue = [selectsss[0].selectedIndex, selectsss[1].selectedIndex];
+	selectsss[0].selectedIndex = selectValue[1];
+	selectsss[1].selectedIndex = selectValue[0];
 
+	let texts = [...document.querySelectorAll("input[type='text']")];
+	let textsVal = texts.map(i => i.value);
+	texts[0].value = textsVal[1];
+	texts[1].value = textsVal[0];
 }
