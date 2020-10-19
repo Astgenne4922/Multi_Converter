@@ -12,6 +12,44 @@ let ops = {
 	Time: [Object.values(time), Object.keys(time)],
 };
 
+let select = `<select class="ConvertionKeys">\n</select>\n`
+let textbox = `<input type="text" class="textbox" value="0">`
+
+let createHtml = `<h2 id="Type">Currencies</h2>\n
+	${select}
+	${textbox}
+	<img src="../img/exchange.png">\n
+	${textbox}
+	${select}`
+document.getElementById("body").innerHTML = createHtml
+
+let inputs = [...document.getElementsByTagName("input")]
+inputs.forEach(element => {
+	setInputFilter(element, v => /^\d*\.?\d*$/.test(v));
+});
+
+let img = [...document.getElementsByTagName("img")][0]
+img.addEventListener("click", exchange)
+
+let setOptions = (event) => {
+	document.getElementById("Type").innerText = event.path[0].innerHTML;
+
+	let selects = [...document.getElementsByTagName("select")]
+
+	let sel = parseInt(e.path[0].id);
+	let opsValues = Object.entries(ops)[sel][1][0]; // insieme dei valori in base al tipo di conversione
+	let opsKey = Object.entries(ops)[sel][1][1]; // insieme delle chiavi in base al tipo di conversione
+	selects.forEach(element => {
+		element.innerHTML = ""
+		opsValues.forEach((el, idx) => {
+			let inSelect = document.createElement("option");
+			inSelect.setAttribute("value", opsKey[idx]);
+			inSelect.innerText = el;
+			element.appendChild(inSelect);
+		});
+	});
+}
+/*
 function createTextbox() {
 	let el = document.createElement("input");
 	el.type = "text";
@@ -28,12 +66,12 @@ function createSelect(e) {
 	selectss.length > 0 ? selectss.map(value => value.remove()) : "";
 	let textss = [...document.getElementsByClassName("textbox")];
 	textss.length > 0 ? textss.map(value => value.remove()) : "";
+	document.getElementById("Container")?.remove()
 	for (let i = 0; i < 2; i++) {
 		let innHtml = document.createElement("select");
 		innHtml.classList.add("ConvertionKeys");
 		let sel = parseInt(e.path[0].id); // per Switch
 		let inSelect;
-		let opsValues = Object.entries(ops)[sel][1][0]; // insieme dei valori in base al tipo di conversione
 		let opsKey = Object.entries(ops)[sel][1][1]; // insieme delle chiavi in base al tipo di conversione
 
 		opsValues.forEach((element, idx) => {
@@ -48,18 +86,19 @@ function createSelect(e) {
 			createTextbox();
 			let img = document.createElement("img");
 			img.src = "../img/exchange.png"
+			img.addEventListener("click", exchange)
 			let cont = document.createElement("div");
 			cont.id = "Container"
 			cont.appendChild(img)
-			document.getElementById("body").appendChild(cont	);
+			document.getElementById("body").appendChild(cont);
 		}
 	}
-}
+}*/
 //#endregion
 let liTags = [...document.getElementsByTagName("li")];
-liTags.map(value => value.addEventListener("click", createSelect));
-liTags[liTags.length - 1].removeEventListener("click", createSelect);
-liTags[liTags.length - 2].removeEventListener("click", createSelect);
+liTags.map(value => value.addEventListener("click", setOptions));
+liTags[liTags.length - 1].removeEventListener("click", setOptions);
+liTags[liTags.length - 2].removeEventListener("click", setOptions);
 
 //#region Hamburger
 
@@ -76,3 +115,12 @@ function closeNav() {
 
 // #endregion
 document.querySelector("li").click();
+
+function exchange(e) {
+	let selectsss = [...document.getElementsByTagName("select")]
+	console.log(selectsss)
+	let selectValue = [selectsss[0].selectedIndex, selectsss[1].selectedIndex ]
+	selectsss[0].selectedIndex = selectValue[1]
+	selectsss[1].selectedIndex = selectValue[0]
+
+}

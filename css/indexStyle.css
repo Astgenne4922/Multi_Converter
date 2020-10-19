@@ -19,11 +19,6 @@ select, input, #Container{
 	margin-bottom: 10px;
 }
 
-#Container{
-	height: max-content;
-	text-align: center;
-}
-
 #body {
 	height: 50vh;
 }
@@ -37,7 +32,10 @@ input {
 }
 
 img {
+	display: block;
+	margin: auto;
 	height: 75px;
+	cursor: pointer;
 }
 
 hr {
