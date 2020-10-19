@@ -44,7 +44,15 @@ function createSelect(e) {
 		});
 		if (i === 1) createTextbox();
 		document.getElementById("body").appendChild(innHtml);
-		if (i === 0) createTextbox();
+		if (i === 0) {
+			createTextbox();
+			let img = document.createElement("img");
+			img.src = "../img/exchange.png"
+			let cont = document.createElement("div");
+			cont.id = "Container"
+			cont.appendChild(img)
+			document.getElementById("body").appendChild(cont	);
+		}
 	}
 }
 //#endregion
