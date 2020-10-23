@@ -26,6 +26,7 @@ document.querySelector("img").addEventListener("click", exchange);
 
 function setOptions(event) {
 	document.getElementById("body").style.display = "block"
+	document.getElementById("Help").style.display = "none";
 	document.getElementById("Support").style.display = "none"
 	document.querySelector("#Type").innerText = event.path[0].innerHTML;
 	[...document.querySelectorAll("input[type='text']")].forEach(e => (e.value = "0"));
@@ -87,9 +88,16 @@ let fornari = Author("Fornari", "Simone", "../img/FornariImage.jpg");
 let candido = Author("Candido", "Daniele", "../img/CandidoImage.jpg");
 document.getElementById("Support").innerHTML = fornari + candido;
 document.getElementById("Support").style.display = "none";
+document.getElementById("Help").style.display = "none";
 
-function InsertSupport(){
-	document.getElementById("body").style.display = "none"
-	document.getElementById("Support").style.display = "table"
+function Insert(e){
+	document.getElementById("body").style.display = "none";
 	document.querySelector("#ham-menu").checked = false;
+	if(e.innerText === "Contact Us"){
+		document.getElementById("Help").style.display = "none"
+		document.getElementById("Support").style.display = "table";
+		return
+	}
+	document.getElementById("Help").style.display = "block"
+	document.getElementById("Support").style.display = "none";
 }
