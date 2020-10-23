@@ -262,11 +262,20 @@ input[type="text"]{
 	margin: auto;
 }
 
-img {
+.author img, #body img {
 	display: block;
 	margin: auto;
 	height: 75px;
 	cursor: pointer;
+}
+
+.swiper-container {
+    width: 600px;
+    height: 300px;
+}
+
+#Help img{
+	height: auto;
 }
 
 .author{

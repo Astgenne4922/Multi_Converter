@@ -1,3 +1,8 @@
+let mySwiper = new Swiper(".swiper-container", {
+	speed: 400,
+	spaceBetween: 100,
+});
+
 let ops = [
 	Object.entries(currency),
 	Object.entries(data),
@@ -13,11 +18,11 @@ let select = "<select class='ConvertionKeys' onchange='selectChange()'>\n</selec
 let textbox = "<input type='text' class='textbox' value='0'>";
 
 let createHtml = `<h2 id="Type">Currency</h2>\n
-	${select}
-	${textbox}
-	<img src="../img/exchange.png">\n
-	${textbox}
-	${select}`;
+					${select}
+					${textbox}
+					<img src="../img/exchange.png">\n
+					${textbox}
+					${select}`;
 document.querySelector("#body").innerHTML = createHtml;
 
 setInputFilter();
@@ -25,9 +30,9 @@ setInputFilter();
 document.querySelector("img").addEventListener("click", exchange);
 
 function setOptions(event) {
-	document.getElementById("body").style.display = "block"
+	document.getElementById("body").style.display = "block";
 	document.getElementById("Help").style.display = "none";
-	document.getElementById("Support").style.display = "none"
+	document.getElementById("Support").style.display = "none";
 	document.querySelector("#Type").innerText = event.path[0].innerHTML;
 	[...document.querySelectorAll("input[type='text']")].forEach(e => (e.value = "0"));
 
@@ -35,7 +40,8 @@ function setOptions(event) {
 
 	let sel = [...event.path[1].children].findIndex(e => e.isSameNode(event.path[0]));
 	let opsValues = ops[sel]; // insieme dei valori in base al tipo di conversione
-	selects.forEach(element => { // aggiunta options ai Select
+	selects.forEach(element => {
+		// aggiunta options ai Select
 		element.innerHTML = "";
 		opsValues.forEach(el => {
 			let inSelect = document.createElement("option");
@@ -65,7 +71,6 @@ document.querySelector("li").click();
 
 function exchange() {
 	let selectsss = [...document.querySelectorAll("select")];
-	console.log(selectsss);
 	let selectValue = [selectsss[0].selectedIndex, selectsss[1].selectedIndex];
 	selectsss[0].selectedIndex = selectValue[1];
 	selectsss[1].selectedIndex = selectValue[0];
@@ -76,12 +81,12 @@ function exchange() {
 	texts[1].value = textsVal[0];
 }
 
-function Author(cognome, nome, imgPath){
-	let div =   `<div class="author">\n
-    <img src="${imgPath}" class="element">\n
-	<label class="element">${cognome}</label>\n
-	<label class="element">${nome}</label>\n
-</div>`
+function Author(cognome, nome, imgPath) {
+	let div = `<div class="author">\n
+					<img src="${imgPath}" class="element">\n
+					<label class="element">${cognome}</label>\n
+					<label class="element">${nome}</label>\n
+				</div>`;
 	return div;
 }
 let fornari = Author("Fornari", "Simone", "../img/FornariImage.jpg");
@@ -90,14 +95,14 @@ document.getElementById("Support").innerHTML = fornari + candido;
 document.getElementById("Support").style.display = "none";
 document.getElementById("Help").style.display = "none";
 
-function Insert(e){
+function Insert(e) {
 	document.getElementById("body").style.display = "none";
 	document.querySelector("#ham-menu").checked = false;
-	if(e.innerText === "Contact Us"){
-		document.getElementById("Help").style.display = "none"
+	if (e.innerText === "Contact Us") {
+		document.getElementById("Help").style.display = "none";
 		document.getElementById("Support").style.display = "table";
-		return
+	} else {
+		document.getElementById("Help").style.display = "block";
+		document.getElementById("Support").style.display = "none";
 	}
-	document.getElementById("Help").style.display = "block"
-	document.getElementById("Support").style.display = "none";
 }
