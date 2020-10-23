@@ -35,7 +35,7 @@ html {
 	font-family: sans-serif;
 	background-color: var(--home-bg-color);
 }
-
+/*#region*/
 #ham-menu {
 	display: none;
 }
@@ -210,28 +210,33 @@ a::after {
 	text-align: center;
 }
 .bold-text,
+/*#endregion*/
+
 hr {
 	font-weight: bold;
 }
 
-h2{
+h2 {
 	font-size: 50px;
 	margin: 25px;
 	text-align: center;
 }
 
-select, input, #Container{
+select,
+input {
 	display: block;
 	margin: auto;
 	margin-bottom: 10px;
 }
 
-#body {
+#body,
+#Help {
 	height: 50vh;
 	margin-top: 10%;
 }
 
-select, input[type="text"]{
+select,
+input[type="text"] {
 	width: 45%;
 	height: 15%;
 	border-radius: 25px;
@@ -240,47 +245,58 @@ select, input[type="text"]{
 	outline: none;
 	font-size: 20px;
 	font-weight: bold;
-	padding-left: 13%;
+	padding-left: 5%;
 }
 
-input[type="text"]{
+input[type="text"] {
 	width: 32.5%;
 	padding: 5px 30px;
 }
 
-#ContactUs{
-	display: table;
+#ContactUs {
 	margin: auto;
+	height: 50vh;
+	margin-top: 10%;
 }
 
-.author img, #body img {
+#body img {
 	display: block;
 	margin: auto;
 	height: 75px;
 	cursor: pointer;
 }
 
+.author img {
+	display: block;
+	margin: auto;
+	height: 150px;
+}
+
+#Help img {
+	height: 50vh;
+	width: auto;
+}
+
+#Help {
+	text-align: center;
+}
+
 .swiper-container {
-    width: 600px;
-    height: 300px;
+	width: 60%;
+	text-align: center;
 }
 
-#Help img{
-	height: auto;
-}
-
-.author{
+.author {
 	display: table-row;
+	cursor: pointer;
 }
 
-.element{
+.element {
 	display: table-cell;
-	font-size: 20px;
+	font-size: 40px;
 	padding-left: 100px;
-}
-
-label.element{
 	vertical-align: middle;
+	cursor: inherit;
 }
 
 input {

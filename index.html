@@ -5,10 +5,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.5.1/math.min.js" integrity="sha512-6SHRAV8GhJ+3WvGPKQNsBpLj7J9QF9JFwH7nPSRLtH/OqFrlXRd54Z+QDgw7xj1f7dV8c50sKhZYr/xGPlMoiw==" crossorigin="anonymous"></script>
-        
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="lib/mathjs/math.min.js"></script>
+
+        <link rel="stylesheet" href="lib/swiper/swiper-bundle.min.css">
+        <script src="lib/swiper/swiper-bundle.min.js"></script>
 
         <link rel="stylesheet" href="css/indexStyle.css">
 
@@ -42,28 +42,23 @@
             </ul>
         </div>
 
-        <div id="body">
+        <div id="body" style="display: none;">
             <h2 id="Type">Currency</h2>
         </div>
-        <div id="ContactUs">
+        <div id="ContactUs" style="display: none;">
         </div>
-        <div id="Help">
+        <div id="Help" style="display: none;">
+            <h2>Welcome to the Multi Converter</h2>
+
             <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="img/tutorial0.png"></div>
-                    <div class="swiper-slide"><img src="img/tutorial1.png"></div>
-                    <div class="swiper-slide"><img src="img/tutorial2.png"></div>
-                    <div class="swiper-slide"><img src="img/tutorial3.png"></div>
-                    <div class="swiper-slide"><img src="img/tutorial4.png"></div>
-                    <div class="swiper-slide"><img src="img/tutorial5.png"></div>
-                </div>
+                <div class="swiper-wrapper"></div>
                 <div class="swiper-pagination"></div>
-            
+
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
-            
-                <div class="swiper-scrollbar"></div>
             </div>
+
+            <p>Use the arrows to swipe</p>
         </div>
 
 

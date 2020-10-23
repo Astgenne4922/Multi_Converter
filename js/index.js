@@ -1,19 +1,30 @@
-let mySwiper = new Swiper(".swiper-container", {
-	speed: 400,
-	spaceBetween: 100,
+let sw = new Swiper(".swiper-container", {
+	pagination: {
+		el: ".swiper-pagination",
+	},
+
+	navigation: {
+		nextEl: ".swiper-button-next",
+		prevEl: ".swiper-button-prev",
+	}
 });
+
+for (let i = 0; i < 6; i++) {
+	sw.appendSlide(`<div class="swiper-slide"><img src="img/tutorial${i}.png"></div>`);
+	sw.update();
+}
+
 
 let ops = [
 	Object.entries(currency),
-	Object.entries(data),
 	Object.entries(length),
-	Object.entries(temperature),
-	Object.entries(mass),
-	Object.entries(volume),
 	Object.entries(area),
+	Object.entries(volume),
+	Object.entries(mass),
+	Object.entries(temperature),
 	Object.entries(time),
+	Object.entries(data),
 ];
-//#endregion
 
 //#region String template
 let select = "<select class='ConvertionKeys' onchange='selectChange()'>\n</select>\n";
@@ -25,22 +36,24 @@ let createHtml = `<h2 id="Type">Currency</h2>\n
 					<img src="../img/exchange.png">\n
 					${textbox}
 					${select}`;
+
 document.querySelector("#body").innerHTML = createHtml;
-//#endregion
 
 setInputFilter();
+//#endregion
+
 //#region aggiunge gli option al select
 function setOptions(event) {
-	document.getElementById("body").style.display = "block";
-	document.getElementById("Help").style.display = "none";
-	document.getElementById("ContactUs").style.display = "none"
+	document.querySelector("#body").style.display = "block";
+	document.querySelector("#Help").style.display = "none";
+	document.querySelector("#ContactUs").style.display = "none";
 
 	document.querySelector("#Type").innerText = event.path[0].innerHTML; // Cambia il testo dell'h2
 	[...document.querySelectorAll("input[type='text']")].forEach(e => (e.value = "0")); //setta il valore iniziale della textbox a 0
 
 	let selects = [...document.querySelectorAll("select")]; //prende tutti i select e li trasforma in array
 
-	// path[1] = primo parente dell'elemento, 
+	// path[1] = primo parente dell'elemento,
 	// findIndex = 1° elemento nell' array che soddisfa la funzione fornita,
 	// isSameNode => controlla se e è lo stesso elemento di event.path[0]
 	let sel = [...event.path[1].children].findIndex(e => e.isSameNode(event.path[0]));
@@ -73,13 +86,13 @@ titles.forEach(e => {
 	li.addEventListener("click", setOptions);
 	liTags.push(li);
 });
-//#endregion
 
-// inserisce tutti gli elementi di liTags prima del primo elemento dell'ul 
-document.querySelector("ul").prepend(...liTags); 
+// inserisce tutti gli elementi di liTags prima del primo elemento dell'ul
+document.querySelector("ul").prepend(...liTags);
 
 // inizializza il primo elemento
-document.querySelector("li").click(); 
+document.querySelector("li").click();
+//#endregion
 
 //#region change value of Select
 function exchange() {
@@ -97,31 +110,53 @@ document.querySelector("img").addEventListener("click", exchange);
 //#endregion
 
 //#region creazione degli autori
-function Author(cognome, nome, imgPath){
-	let div =   `<div class="author">\n
-    <img src="${imgPath}" class="element">\n
-	<label class="element">${cognome}</label>\n
-	<label class="element">${nome}</label>\n
-</div>`
+function Author(cognome, nome, imgPath) {
+	let div = `<div class="author" onclick="showLink('${nome}')">\n
+					<img src="${imgPath}" class="element">\n
+					<label class="element">${cognome}</label>\n
+					<label class="element">${nome}</label>\n
+				</div>`;
 	return div;
 }
+
+function showLink(nome) {
+	window.open(`https://github.com/${nome === "Simone" ? "Fornari-Simone" : "OOPArt4922"}`, "blank");
+}
+
+
 let fornari = Author("Fornari", "Simone", "../img/FornariImage.jpg");
 let candido = Author("Candido", "Daniele", "../img/CandidoImage.jpg");
-document.getElementById("ContactUs").innerHTML = fornari + candido;
-document.getElementById("ContactUs").style.display = "none";
-document.getElementById("Help").style.display = "none";
+document.querySelector("#ContactUs").innerHTML = fornari + candido;
 //#endregion
 
-//#region mostra l'help o il 
-function Insert(e){
-	document.getElementById("body").style.display = "none";
+//#region mostra l'help o il contact
+function Insert(e) {
+	document.querySelector("#body").style.display = "none";
 	document.querySelector("#ham-menu").checked = false;
-	if(e.innerText === "Contact Us"){
-		document.getElementById("Help").style.display = "none"
-		document.getElementById("ContactUs").style.display = "table";
-		return
-	}
-	document.getElementById("Help").style.display = "block"
-	document.getElementById("ContactUs").style.display = "none";
+
+	/* 
+		Same as if else but shorter
+		if (check) { 				|	[var1, var2] = check ? [value1, value2] : [value3, value4]
+			var1 = value1;			|
+			var2 = value2;			|
+		} else {					|
+			var1 = value3;			|
+			var2 = value4;			|
+		}
+	*/
+	[document.querySelector("#Help").style.display, document.querySelector("#ContactUs").style.display] =
+		e.innerText === "Contact Us" ? ["none", "table"] : ["block", "none"];
+	if (e.innerText !== "Contact Us") sw.update();
 }
 //#endregion
+
+/*
+	If is the first time on the page redirect to the help page
+*/
+let help = JSON.parse(window.localStorage.getItem("showHelp")) === null ? true : false;
+if (help) {
+	window.localStorage.setItem("showHelp", "false");
+	document.querySelector("li:nth-last-child(2)").click();
+} else {
+	document.querySelector("li").click();
+}

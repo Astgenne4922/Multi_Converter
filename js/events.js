@@ -54,11 +54,15 @@ function selectChange() {
 
 function convert(n, e) {
 	let sels = [...document.querySelectorAll("select")];
-	let base = Object.keys(currency)[sels[0].selectedIndex];
-	let to = Object.keys(currency)[sels[1].selectedIndex];
 
 	let texts = [...document.querySelectorAll("input[type='text']")];
-	let textTo = texts.findIndex(i => i.isSameNode(e)) === 0 ? texts[1] : texts[0];
+	/*
+		Get the textbox for the result and the exact order of the selected units
+	*/
+	let [textTo, base, to] =
+		texts.findIndex(i => i.isSameNode(e)) === 0
+			? [texts[1], Object.keys(currency)[sels[0].selectedIndex], Object.keys(currency)[sels[1].selectedIndex]]
+			: [texts[0], Object.keys(currency)[sels[1].selectedIndex], Object.keys(currency)[sels[0].selectedIndex]];
 
 	if (document.querySelector("#Type").innerText === "Currency") {
 		/*
