@@ -1,5 +1,3 @@
-"use strict";
-
 let ops = [
 	Object.entries(currency),
 	Object.entries(data),
@@ -27,6 +25,8 @@ setInputFilter();
 document.querySelector("img").addEventListener("click", exchange);
 
 function setOptions(event) {
+	document.getElementById("body").style.display = "block"
+	document.getElementById("Support").style.display = "none"
 	document.querySelector("#Type").innerText = event.path[0].innerHTML;
 	[...document.querySelectorAll("input[type='text']")].forEach(e => (e.value = "0"));
 
@@ -34,7 +34,7 @@ function setOptions(event) {
 
 	let sel = [...event.path[1].children].findIndex(e => e.isSameNode(event.path[0]));
 	let opsValues = ops[sel]; // insieme dei valori in base al tipo di conversione
-	selects.forEach(element => {
+	selects.forEach(element => { // aggiunta options ai Select
 		element.innerHTML = "";
 		opsValues.forEach(el => {
 			let inSelect = document.createElement("option");
@@ -48,53 +48,6 @@ function setOptions(event) {
 
 	document.querySelector("#ham-menu").checked = false;
 }
-
-/*
-function createTextbox() {
-	let el = document.createElement("input");
-	el.type = "text";
-	el.value = "0";
-	el.classList.add("textbox")
-	setInputFilter(el, v => /^\d*\.?\d*$/.test(v));
-	document.getElementById("body").appendChild(el);
-}
-//#region create select for type
-function createSelect(e) {
-	document.getElementById("Type").innerText = e.path[0].innerHTML;
-	console.log(document.getElementsByClassName("ConvertionKeys"));
-	let selectss = [...document.getElementsByClassName("ConvertionKeys")];
-	selectss.length > 0 ? selectss.map(value => value.remove()) : "";
-	let textss = [...document.getElementsByClassName("textbox")];
-	textss.length > 0 ? textss.map(value => value.remove()) : "";
-	document.getElementById("Container")?.remove()
-	for (let i = 0; i < 2; i++) {
-		let innHtml = document.createElement("select");
-		innHtml.classList.add("ConvertionKeys");
-		let sel = parseInt(e.path[0].id); // per Switch
-		let inSelect;
-		let opsKey = Object.entries(ops)[sel][1][1]; // insieme delle chiavi in base al tipo di conversione
-
-		opsValues.forEach((element, idx) => {
-			inSelect = document.createElement("option");
-			inSelect.setAttribute("value", opsKey[idx]);
-			inSelect.innerText = element;
-			innHtml.appendChild(inSelect);
-		});
-		if (i === 1) createTextbox();
-		document.getElementById("body").appendChild(innHtml);
-		if (i === 0) {
-			createTextbox();
-			let img = document.createElement("img");
-			img.src = "../img/exchange.png"
-			img.addEventListener("click", exchange)
-			let cont = document.createElement("div");
-			cont.id = "Container"
-			cont.appendChild(img)
-			document.getElementById("body").appendChild(cont);
-		}
-	}
-}*/
-//#endregion
 
 let liTags = [];
 
@@ -120,4 +73,23 @@ function exchange() {
 	let textsVal = texts.map(i => i.value);
 	texts[0].value = textsVal[1];
 	texts[1].value = textsVal[0];
+}
+
+function Author(cognome, nome, imgPath){
+	let div =   `<div class="author">\n
+    <img src="${imgPath}" class="element">\n
+	<label class="element">${cognome}</label>\n
+	<label class="element">${nome}</label>\n
+</div>`
+	return div;
+}
+let fornari = Author("Fornari", "Simone", "../img/FornariImage.jpg");
+let candido = Author("Candido", "Daniele", "../img/CandidoImage.jpg");
+document.getElementById("Support").innerHTML = fornari + candido;
+document.getElementById("Support").style.display = "none";
+
+function InsertSupport(){
+	document.getElementById("body").style.display = "none"
+	document.getElementById("Support").style.display = "table"
+	document.querySelector("#ham-menu").checked = false;
 }
