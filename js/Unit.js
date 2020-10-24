@@ -149,4 +149,15 @@ const data = {
 	YB: "YottaByte",
 };
 
-const titles = ["Currency", "Lenght", "Area", "Volume", "Mass", "Temperature", "Time", "Data"];
+const titles = ["Currency", "Length", "Area", "Volume", "Mass", "Temperature", "Time", "Data"];
+
+const all = {
+	currency: currency,
+	length: length,
+	area: area,
+	volume: volume,
+	mass: mass,
+	temperature: temperature,
+	time: time,
+	data: data,
+}

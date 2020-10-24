@@ -54,17 +54,25 @@ function selectChange() {
 
 function convert(n, e) {
 	let sels = [...document.querySelectorAll("select")];
-
+	let type = document.querySelector("#Type").innerText;
 	let texts = [...document.querySelectorAll("input[type='text']")];
 	/*
 		Get the textbox for the result and the exact order of the selected units
 	*/
 	let [textTo, base, to] =
 		texts.findIndex(i => i.isSameNode(e)) === 0
-			? [texts[1], Object.keys(currency)[sels[0].selectedIndex], Object.keys(currency)[sels[1].selectedIndex]]
-			: [texts[0], Object.keys(currency)[sels[1].selectedIndex], Object.keys(currency)[sels[0].selectedIndex]];
+			? [
+					texts[1],
+					Object.keys(all[type.toLowerCase()])[sels[0].selectedIndex],
+					Object.keys(all[type.toLowerCase()])[sels[1].selectedIndex],
+			]
+			: [
+					texts[0],
+					Object.keys(all[type.toLowerCase()])[sels[1].selectedIndex],
+					Object.keys(all[type.toLowerCase()])[sels[0].selectedIndex],
+			];
 
-	if (document.querySelector("#Type").innerText === "Currency") {
+	if (type === "Currency") {
 		/*
 			Using the Exchange Rates API to fetch the convertion values
 		*/
