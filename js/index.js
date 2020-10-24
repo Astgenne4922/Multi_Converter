@@ -1,20 +1,22 @@
+//#region swiper per l'help
 let sw = new Swiper(".swiper-container", {
-	pagination: {
+	pagination: {//punti sotto
 		el: ".swiper-pagination",
 	},
 
-	navigation: {
+	navigation: {//freccette
 		nextEl: ".swiper-button-next",
 		prevEl: ".swiper-button-prev",
 	}
 });
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 6; i++) { //appende le immagini
 	sw.appendSlide(`<div class="swiper-slide"><img src="img/tutorial${i}.png"></div>`);
 	sw.update();
 }
+//#endregion
 
-
+//#region Object.entries = "${key}: ${value}" 
 let ops = [
 	Object.entries(currency),
 	Object.entries(length),
@@ -25,6 +27,7 @@ let ops = [
 	Object.entries(time),
 	Object.entries(data),
 ];
+//#endregion
 
 //#region String template
 let select = "<select class='ConvertionKeys' onchange='selectChange()'>\n</select>\n";
@@ -150,9 +153,7 @@ function Insert(e) {
 }
 //#endregion
 
-/*
-	If is the first time on the page redirect to the help page
-*/
+//#region If is the first time on the page redirect to the help page
 let help = JSON.parse(window.localStorage.getItem("showHelp")) === null ? true : false;
 if (help) {
 	window.localStorage.setItem("showHelp", "false");
@@ -160,3 +161,4 @@ if (help) {
 } else {
 	document.querySelector("li").click();
 }
+//#endregion

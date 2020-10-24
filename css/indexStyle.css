@@ -257,6 +257,7 @@ input[type="text"] {
 	margin: auto;
 	height: 50vh;
 	margin-top: 10%;
+	display: none;
 }
 
 #body img {
@@ -279,6 +280,7 @@ input[type="text"] {
 
 #Help {
 	text-align: center;
+	display: none;
 }
 
 .swiper-container {
