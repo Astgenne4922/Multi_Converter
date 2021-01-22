@@ -1,0 +1,19 @@
+{
+	"name": "multi-converter",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.mjs",
+	"scripts": {
+		"start": "node server.mjs",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1",
+		"helmet": "^3.21.3",
+		"morgan": "^1.9.1",
+		"path": "^0.12.7",
+		"serve-favicon": "^2.5.0"
+	}
+}
